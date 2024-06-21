@@ -1,0 +1,109 @@
+create user:
+mutation {
+  createUser(userInput: {
+    email: "newuser@example.com",
+    password: "securepassword"
+  }) {
+    id
+    email
+  }
+}
+
+user login:
+{
+  login(loginInput: { email: "newuser@example.com", password: "securepassword" }) {
+    userId
+    token
+    tokenExpiration
+  }
+}
+
+
+Header: {"Content-Type":"application/json", "Authorization": ""}
+
+create event:
+
+mutation {
+  createEvent(eventInput: {
+    title: "Operation Mincemeat",
+    description: "Operation Mincemeat is a musical comedy with book, music and lyrics by David Cumming, Felix Hagan, Natasha Hodgson, and Zoë Roberts. The plot is based on the Operation Mincemeat, a Second World War British deception operation.",
+    price: 49.00,
+    date: "2024-07-02T15:00:00.000Z"
+  }) {
+    id
+    title
+    description
+    price
+    date
+    creator {
+      id
+      email
+    }
+  }
+}
+
+book an event:
+
+mutation {
+  bookEvent(eventId: "1") {
+    id
+    event {
+      id
+      title
+    }
+    user {
+      id
+      email
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+cancel a booking:
+
+mutation {
+  cancelBooking(bookingId: "1") {
+    id
+    title
+    description
+    price
+    date
+  }
+}
+
+fetch all events:
+
+{
+  events {
+    id
+    title
+    description
+    price
+    date
+    creator {
+      id
+      email
+    }
+  }
+}
+
+fetch all events:
+
+{
+  users {
+    id
+    email
+    createdEvents {
+      id
+      title
+    }
+    bookings {
+      id
+      event {
+        title
+      }
+    }
+  }
+}
+
